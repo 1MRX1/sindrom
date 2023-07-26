@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Documents;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Sindrom
 {
@@ -11,7 +12,7 @@ namespace Sindrom
     public partial class MainWindow : Window
     {
         public object a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z ;
-        public List<object> listAl = new();
+        public List<CoderMTK> listAl = new();
 
 
         public MainWindow()
@@ -45,31 +46,31 @@ namespace Sindrom
             y = new CoderMTK('y', "10101");
             z = new CoderMTK('z', "10001");
 
-            listAl.Add(a);
-            listAl.Add(b);
-            listAl.Add(c);
-            listAl.Add(d);
-            listAl.Add(e);
-            listAl.Add(f);
-            listAl.Add(g);
-            listAl.Add(h);
-            listAl.Add(i);
-            listAl.Add(j);
-            listAl.Add(k);
-            listAl.Add(l);
-            listAl.Add(m);
-            listAl.Add(n);
-            listAl.Add(p);
-            listAl.Add(q);
-            listAl.Add(r);
-            listAl.Add(s);
-            listAl.Add(t);
-            listAl.Add(u);
-            listAl.Add(v);
-            listAl.Add(w);
-            listAl.Add(x);
-            listAl.Add(y);
-            listAl.Add(z);
+            listAl.Add((CoderMTK)a);
+            listAl.Add((CoderMTK)b);
+            listAl.Add((CoderMTK)c);
+            listAl.Add((CoderMTK)d);
+            listAl.Add((CoderMTK)e);
+            listAl.Add((CoderMTK)f);
+            listAl.Add((CoderMTK)g);
+            listAl.Add((CoderMTK)h);
+            listAl.Add((CoderMTK)i);
+            listAl.Add((CoderMTK)j);
+            listAl.Add((CoderMTK)k);
+            listAl.Add((CoderMTK)l);
+            listAl.Add((CoderMTK)m);
+            listAl.Add((CoderMTK)n);
+            listAl.Add((CoderMTK)p);
+            listAl.Add((CoderMTK)q);
+            listAl.Add((CoderMTK)r);
+            listAl.Add((CoderMTK)s);
+            listAl.Add((CoderMTK)t);
+            listAl.Add((CoderMTK)u);
+            listAl.Add((CoderMTK)v);
+            listAl.Add((CoderMTK)w);
+            listAl.Add((CoderMTK)x);
+            listAl.Add((CoderMTK)y);
+            listAl.Add((CoderMTK)z);
         }
 
         public class CoderMTK 
@@ -80,8 +81,8 @@ namespace Sindrom
                 Kod = v2;
             }
 
-            char Symbhol { get; set; }
-            string Kod { get; set; }
+            public char Symbhol { get; set; }
+            public string Kod { get; set; }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -90,7 +91,18 @@ namespace Sindrom
             {
                 var sindromText = sindrom_txt.Text.ToLower();
                 var sindromMassiveTxt = sindromText.ToList();
-                var kodMassive = 
+                var kodMassive = "";
+
+                foreach(var symbhol in sindromMassiveTxt) 
+                {
+                    if (listAl.Find(x => x.Symbhol == symbhol) != null) 
+                    {
+                        var i = listAl.Find(x => x.Symbhol == symbhol);
+                        kodMassive += i.Kod.ToString();
+                    }
+                }
+
+                string[] a = kodMassive.Chunk(4).Select(x => new string(x)).ToArray();
             }
         }
     }
